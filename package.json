@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate"
+    "postinstall": "npx cross-env DATABASE_URL=file:./dev.db prisma generate"
   },
   "dependencies": {
     "@libsql/client": "^0.17.4",
