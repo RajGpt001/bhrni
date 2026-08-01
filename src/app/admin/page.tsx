@@ -56,7 +56,7 @@ export default async function AdminDashboard() {
                   </td>
                 </tr>
               ) : (
-                recentOrders.map((order) => (
+                recentOrders.map((order: any) => (
                   <tr key={order.id} className="hover:bg-gray-50 dark:hover:bg-zinc-800/50">
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{order.id.slice(-8).toUpperCase()}</td>
                     <td className="px-6 py-4">{order.user?.name || 'Guest'}</td>
