@@ -136,7 +136,7 @@ export default async function Home() {
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-          {featuredProducts.map((product) => (
+          {featuredProducts.map((product: any) => (
             <Link key={product.id} href={`/product/${product.slug}`} className="group flex flex-col">
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-200 xl:aspect-[4/5]">
                 {product.images[0] && (
