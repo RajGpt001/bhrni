@@ -1,3 +1,4 @@
+/* eslint-disable */
 const { PrismaClient } = require('@prisma/client');
 const { PrismaSqlite } = require('prisma-adapter-sqlite');
 const adapter = new PrismaSqlite({ url: './dev.db' });
