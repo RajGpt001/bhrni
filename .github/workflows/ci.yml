@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install Dependencies
+      run: npm ci
+      
+    - name: Generate Prisma Client
+      run: npx prisma generate
+      
+    - name: Type Check
+      run: npm run typecheck --if-present
+      
+    - name: Lint
+      run: npm run lint
+      
+    - name: Build Next.js
+      run: npm run build
+      env:
+        # Mock database URL just to pass the build step if Prisma requires it
+        DATABASE_URL: "postgresql://mock:mock@localhost:5432/mock"

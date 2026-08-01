@@ -1,0 +1,15 @@
+import { PrismaClient } from '@prisma/client';
+import { PrismaSqlite } from 'prisma-adapter-sqlite';
+
+const prismaClientSingleton = () => {
+  const adapter = new PrismaSqlite({ url: './dev.db' });
+  return new PrismaClient({ adapter });
+};
+
+declare global {
+  var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>;
+}
+
+export const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
+
+if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma;
