@@ -14,8 +14,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       include: { images: true, category: true, variants: true },
     });
   } catch (error) {
-    product = {
-      id: 'fallback-1',
+    if (slug === 'mosquito-lamp') {
+      product = {
+        id: 'fallback-0',
+        name: 'Mosquito Lamp',
+        slug,
+        price: 499,
+        mrp: 999,
+        description: 'Keep your environment mosquito-free with this quiet, safe, and efficient Mosquito Lamp. Powered by USB, this portable bug zapper uses physical mosquito control with a 368nm purple light wave to attract and trap insects safely without radiation. Easy to clean and perfect for home, office, or outdoor use.',
+        category: { name: 'Electronics', slug: 'electronics' },
+        images: [
+          { id: 'mq-1', url: '/products/mosquito-lamp/1.png' },
+          { id: 'mq-2', url: '/products/mosquito-lamp/2.png' },
+          { id: 'mq-3', url: '/products/mosquito-lamp/3.jpg' },
+          { id: 'mq-4', url: '/products/mosquito-lamp/4.jpg' }
+        ],
+        variants: [{ sku: 'MOSQ-LMP-01' }]
+      };
+    } else {
+      product = {
+        id: 'fallback-1',
       name: 'Smartphone Pro Max (Demo)',
       slug,
       price: 89999,
@@ -25,6 +43,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       images: [{ id: 'img-1', url: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&q=80' }],
       variants: [{ sku: 'DEMO-123' }]
     };
+  }
   }
 
   if (!product) {

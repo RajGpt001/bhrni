@@ -22,6 +22,15 @@ export default async function Home() {
     console.error("Prisma failed (expected on Vercel with local SQLite). Using fallback data.");
     featuredProducts = [
       {
+        id: 'fallback-0',
+        name: 'Mosquito Lamp',
+        slug: 'mosquito-lamp',
+        price: 499,
+        mrp: 999,
+        category: { name: 'Electronics' },
+        images: [{ url: '/products/mosquito-lamp/1.png' }]
+      },
+      {
         id: 'fallback-1',
         name: 'Smartphone Pro Max',
         slug: 'smartphone-pro-max',
