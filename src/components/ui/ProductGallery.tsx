@@ -14,7 +14,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
   const selectedImage = images[selectedIndex] || images[0];
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row gap-4">
+    <div className="flex flex-col-reverse lg:flex-row gap-4 items-start">
       <div className="flex lg:flex-col gap-4 overflow-x-auto lg:overflow-visible w-full lg:w-24 flex-shrink-0">
         {images.map((img: any, i: number) => (
           <button
