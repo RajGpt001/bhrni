@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { LampIntro } from "@/components/ui/LampIntro";
 import { HeroAnimation } from "@/components/ui/HeroAnimation";
 import WoodenCartButton from "@/components/ui/wooden-cart-button";
+import { ProductGridImage } from "@/components/ui/ProductGridImage";
 
 export default async function Home() {
   const cookieStore = await cookies();
@@ -166,14 +167,7 @@ export default async function Home() {
           {featuredProducts.map((product: any) => (
             <Link key={product.id} href={`/product/${product.slug}`} className="group flex flex-col">
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-200 xl:aspect-square">
-                {product.images[0] && (
-                  <Image
-                    src={product.images[0].url}
-                    alt={product.images[0].alt || product.name}
-                    fill
-                    className="h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
-                  />
-                )}
+                <ProductGridImage images={product.images} name={product.name} />
               </div>
               <div className="mt-4 flex flex-col flex-1">
                 <div className="flex justify-between items-start gap-4">
