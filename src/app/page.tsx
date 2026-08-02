@@ -29,7 +29,13 @@ export default async function Home() {
         price: 399,
         mrp: 799,
         category: { name: 'Home & Decor' },
-        images: [{ url: '/products/turtle-combo/1.jpg' }]
+        images: [
+          { url: '/products/turtle-combo/1.jpg' },
+          { url: '/products/turtle-combo/2.jpg' },
+          { url: '/products/turtle-combo/3.jpg' },
+          { url: '/products/turtle-combo/4.jpg' },
+          { url: '/products/turtle-combo/5.jpg' }
+        ]
       },
       {
         id: 'fallback-ash',
@@ -38,7 +44,13 @@ export default async function Home() {
         price: 299,
         mrp: 599,
         category: { name: 'Home & Decor' },
-        images: [{ url: '/products/ash-tray/1.jpg' }]
+        images: [
+          { url: '/products/ash-tray/1.jpg' },
+          { url: '/products/ash-tray/2.jpg' },
+          { url: '/products/ash-tray/3.jpg' },
+          { url: '/products/ash-tray/4.png' },
+          { url: '/products/ash-tray/5.jpg' }
+        ]
       },
       {
         id: 'fallback-0',
@@ -47,7 +59,12 @@ export default async function Home() {
         price: 499,
         mrp: 999,
         category: { name: 'Electronics' },
-        images: [{ url: '/products/mosquito-lamp/1.png' }]
+        images: [
+          { url: '/products/mosquito-lamp/1.png' },
+          { url: '/products/mosquito-lamp/2.png' },
+          { url: '/products/mosquito-lamp/3.jpg' },
+          { url: '/products/mosquito-lamp/4.jpg' }
+        ]
       },
       {
         id: 'fallback-1',
