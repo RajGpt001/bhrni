@@ -21,16 +21,22 @@ export function ProductGridImage({ images, name }: { images: any[]; name: string
   return (
     <>
       {images.map((image, index) => (
-        <Image
+        <div
           key={image.url || index}
-          src={image.url}
-          alt={image.alt || name}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className={`h-full w-full object-contain object-center group-hover:scale-105 transition-all duration-700 ease-in-out ${
-            index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+          className={`absolute inset-0 transition-all duration-1000 ease-out ${
+            index === currentIndex 
+              ? "opacity-100 scale-100 blur-0 z-10" 
+              : "opacity-0 scale-110 blur-sm z-0 pointer-events-none"
           }`}
-        />
+        >
+          <Image
+            src={image.url}
+            alt={image.alt || name}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
       ))}
     </>
   );
