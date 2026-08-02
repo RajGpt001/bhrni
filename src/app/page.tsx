@@ -73,7 +73,12 @@ export default async function Home() {
         price: 89999,
         mrp: 99999,
         category: { name: 'Electronics' },
-        images: [{ url: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&q=80' }]
+        images: [
+          { url: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1605236453806-6ff36852230e?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?w=800&q=80' }
+        ]
       },
       {
         id: 'fallback-2',
@@ -82,7 +87,12 @@ export default async function Home() {
         price: 19999,
         mrp: 29999,
         category: { name: 'Electronics' },
-        images: [{ url: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&q=80' }]
+        images: [
+          { url: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&q=80' }
+        ]
       },
       {
         id: 'fallback-3',
@@ -91,7 +101,12 @@ export default async function Home() {
         price: 45999,
         mrp: 54999,
         category: { name: 'Electronics' },
-        images: [{ url: 'https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&q=80' }]
+        images: [
+          { url: 'https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1601944179066-29786cb9d32a?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1509281373149-e957c6296406?w=800&q=80' }
+        ]
       },
       {
         id: 'fallback-4',
@@ -100,7 +115,12 @@ export default async function Home() {
         price: 999,
         mrp: 1999,
         category: { name: 'Fashion' },
-        images: [{ url: 'https://images.unsplash.com/photo-1596755094514-f87e32f85e23?w=800&q=80' }]
+        images: [
+          { url: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1596755094514-f87e32f85e23?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80' }
+        ]
       }
     ];
   }

@@ -101,7 +101,12 @@ export default async function CategoryPage({
         price: 89999,
         mrp: 99999,
         category: { name: 'Electronics' },
-        images: [{ url: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&q=80' }]
+        images: [
+          { url: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1605236453806-6ff36852230e?w=800&q=80' },
+          { url: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?w=800&q=80' }
+        ]
       }
     ];
   }
