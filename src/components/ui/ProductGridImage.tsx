@@ -53,8 +53,11 @@ export function ProductGridImage({ images, name, index = 0 }: { images: any[]; n
 
       {/* Pixelated Transition Overlay */}
       {images.length > 1 && (
-        <div className="absolute inset-0 grid grid-cols-10 grid-rows-10 z-20 pointer-events-none">
-          {Array.from({ length: 100 }).map((_, i) => (
+        <div 
+          className="absolute inset-0 grid z-20 pointer-events-none"
+          style={{ gridTemplateColumns: 'repeat(20, 1fr)', gridTemplateRows: 'repeat(20, 1fr)' }}
+        >
+          {Array.from({ length: 400 }).map((_, i) => (
             <div
               key={`${currentIndex}-${i}`}
               className="bg-white dark:bg-black w-full h-full opacity-100"
