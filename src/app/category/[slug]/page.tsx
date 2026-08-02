@@ -50,6 +50,15 @@ export default async function CategoryPage({
   } catch (error) {
     products = [
       {
+        id: 'fallback-turtle',
+        name: 'Turtle Combo',
+        slug: 'turtle-combo',
+        price: 399,
+        mrp: 799,
+        category: { name: 'Home & Decor' },
+        images: [{ url: '/products/turtle-combo/1.jpg' }]
+      },
+      {
         id: 'fallback-ash',
         name: 'Ash Tray',
         slug: 'ash-tray',

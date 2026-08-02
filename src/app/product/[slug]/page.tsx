@@ -15,7 +15,25 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       include: { images: true, category: true, variants: true },
     });
   } catch (error) {
-    if (slug === 'ash-tray') {
+    if (slug === 'turtle-combo') {
+      product = {
+        id: 'fallback-turtle',
+        name: 'Turtle Combo',
+        slug,
+        price: 399,
+        mrp: 799,
+        description: 'A beautiful glass turtle combo featuring a unique turtle design inside an elegant ash tray. Crystal clear finish, durable and stylish. Perfect for gifting or home decor.',
+        category: { name: 'Home & Decor', slug: 'home-decor' },
+        images: [
+          { id: 'tc-1', url: '/products/turtle-combo/1.jpg' },
+          { id: 'tc-2', url: '/products/turtle-combo/2.jpg' },
+          { id: 'tc-3', url: '/products/turtle-combo/3.jpg' },
+          { id: 'tc-4', url: '/products/turtle-combo/4.jpg' },
+          { id: 'tc-5', url: '/products/turtle-combo/5.jpg' }
+        ],
+        variants: [{ sku: 'TRT-CMB-01' }]
+      };
+    } else if (slug === 'ash-tray') {
       product = {
         id: 'fallback-ash',
         name: 'Ash Tray',
