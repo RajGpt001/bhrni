@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ProductGallery } from "@/components/ui/ProductGallery";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -78,20 +79,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="container mx-auto max-w-7xl px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
           {/* Product Images */}
-          <div className="flex flex-col-reverse lg:flex-row gap-4">
-            <div className="flex lg:flex-col gap-4 overflow-x-auto lg:overflow-visible w-full lg:w-24 flex-shrink-0">
-              {product.images.map((img: any, i: number) => (
-                <button key={img.id} className={`relative aspect-square w-20 lg:w-full flex-shrink-0 overflow-hidden rounded-xl border-2 ${i === 0 ? 'border-black dark:border-white' : 'border-transparent'} hover:border-gray-300 dark:hover:border-gray-600 transition-colors`}>
-                  <Image src={img.url} alt={img.alt || product.name} fill className="object-cover" />
-                </button>
-              ))}
-            </div>
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900">
-              {product.images[0] && (
-                <Image src={product.images[0].url} alt={product.images[0].alt || product.name} fill className="object-cover object-center" priority />
-              )}
-            </div>
-          </div>
+          <ProductGallery images={product.images} productName={product.name} />
 
           {/* Product Info */}
           <div className="flex flex-col">
