@@ -15,7 +15,25 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       include: { images: true, category: true, variants: true },
     });
   } catch (error) {
-    if (slug === 'mosquito-lamp') {
+    if (slug === 'ash-tray') {
+      product = {
+        id: 'fallback-ash',
+        name: 'Ash Tray',
+        slug,
+        price: 299,
+        mrp: 599,
+        description: 'A premium quality glass ash tray for home or office. Durable, elegant, and easy to clean. Designed to elevate any setting with its modern and clear aesthetics. Perfect for indoor or outdoor use.',
+        category: { name: 'Home & Decor', slug: 'home-decor' },
+        images: [
+          { id: 'at-1', url: '/products/ash-tray/1.jpg' },
+          { id: 'at-2', url: '/products/ash-tray/2.jpg' },
+          { id: 'at-3', url: '/products/ash-tray/3.jpg' },
+          { id: 'at-4', url: '/products/ash-tray/4.png' },
+          { id: 'at-5', url: '/products/ash-tray/5.jpg' }
+        ],
+        variants: [{ sku: 'ASH-TRY-01' }]
+      };
+    } else if (slug === 'mosquito-lamp') {
       product = {
         id: 'fallback-0',
         name: 'Mosquito Lamp',

@@ -50,6 +50,15 @@ export default async function CategoryPage({
   } catch (error) {
     products = [
       {
+        id: 'fallback-ash',
+        name: 'Ash Tray',
+        slug: 'ash-tray',
+        price: 299,
+        mrp: 599,
+        category: { name: 'Home & Decor' },
+        images: [{ url: '/products/ash-tray/1.jpg' }]
+      },
+      {
         id: 'fallback-0',
         name: 'Mosquito Lamp',
         slug: 'mosquito-lamp',
