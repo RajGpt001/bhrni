@@ -7,6 +7,8 @@ import { LampIntro } from "@/components/ui/LampIntro";
 import { HeroAnimation } from "@/components/ui/HeroAnimation";
 import WoodenCartButton from "@/components/ui/wooden-cart-button";
 import { ProductGridImage } from "@/components/ui/ProductGridImage";
+import { FeaturedLogos } from "@/components/ui/FeaturedLogos";
+import { CommunityBanner } from "@/components/ui/CommunityBanner";
 
 export default async function Home() {
   const cookieStore = await cookies();
@@ -232,6 +234,9 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      <FeaturedLogos />
+      <CommunityBanner />
     </div>
   );
 }

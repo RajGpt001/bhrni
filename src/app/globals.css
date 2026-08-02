@@ -26,3 +26,12 @@ body {
 
 @keyframes pixelFade { 0% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
 
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
