@@ -162,7 +162,7 @@ export default async function Home() {
                     src={product.images[0].url}
                     alt={product.images[0].alt || product.name}
                     fill
-                    className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    className="h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
                   />
                 )}
               </div>

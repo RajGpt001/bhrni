@@ -161,7 +161,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                       src={p.images[0].url}
                       alt={p.images[0].alt || p.name}
                       fill
-                      className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                      className="h-full w-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
                     />
                   )}
                 </div>

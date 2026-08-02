@@ -30,7 +30,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               src={img.url}
               alt={img.alt || productName}
               fill
-              className="object-cover"
+              className="object-contain"
             />
           </button>
         ))}
@@ -41,7 +41,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
             src={selectedImage.url}
             alt={selectedImage.alt || productName}
             fill
-            className="object-cover object-center"
+            className="object-contain object-center"
             priority
           />
         )}
