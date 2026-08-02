@@ -9,8 +9,9 @@ export function ProductGridImage({ images, name, index = 0 }: { images: any[]; n
   useEffect(() => {
     if (!images || images.length <= 1) return;
 
-    // Stagger the start time by 1000ms per index
-    const initialDelay = (index % 3) * 1000;
+    // Stagger the start time by row (assuming 4 items per row on desktop)
+    const rowIndex = Math.floor(index / 4);
+    const initialDelay = rowIndex * 1500; // 1.5s delay between rows
     let interval: NodeJS.Timeout;
 
     const timeout = setTimeout(() => {
