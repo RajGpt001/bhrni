@@ -20,13 +20,14 @@ export function ProductGridImage({ images, name }: { images: any[]; name: string
 
   return (
     <>
+      {/* Images */}
       {images.map((image, index) => (
         <div
           key={image.url || index}
-          className={`absolute inset-0 transition-all duration-1000 ease-out ${
+          className={`absolute inset-0 transition-opacity duration-[10ms] ease-out ${
             index === currentIndex 
-              ? "opacity-100 scale-100 blur-0 z-10" 
-              : "opacity-0 scale-110 blur-sm z-0 pointer-events-none"
+              ? "opacity-100 z-10" 
+              : "opacity-0 z-0 pointer-events-none"
           }`}
         >
           <Image
@@ -38,6 +39,22 @@ export function ProductGridImage({ images, name }: { images: any[]; name: string
           />
         </div>
       ))}
+
+      {/* Pixelated Transition Overlay */}
+      {images.length > 1 && (
+        <div className="absolute inset-0 grid grid-cols-10 grid-rows-10 z-20 pointer-events-none">
+          {Array.from({ length: 100 }).map((_, i) => (
+            <div
+              key={`${currentIndex}-${i}`}
+              className="bg-white dark:bg-black w-full h-full opacity-100"
+              style={{
+                animation: `pixelFade 0.15s forwards`,
+                animationDelay: `${Math.random() * 0.4}s`
+              }}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }
