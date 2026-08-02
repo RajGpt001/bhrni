@@ -9,6 +9,20 @@ export function LampIntro() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDismissed, setIsDismissed] = useState(false);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isDismissed) {
+        document.cookie = "lamp_intro_seen=true; path=/";
+        setIsDismissed(true);
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+        });
+      }
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [isDismissed]);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
