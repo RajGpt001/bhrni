@@ -172,10 +172,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-t border-gray-200 dark:border-gray-800 mt-12">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">You May Also Like</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-            {relatedProducts.map((p: any) => (
+            {relatedProducts.map((p: any, index: number) => (
               <Link key={p.id} href={`/product/${p.slug}`} className="group flex flex-col">
                 <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-200 xl:aspect-square">
-                  <ProductGridImage images={p.images} name={p.name} />
+                  <ProductGridImage images={p.images} name={p.name} index={index} />
                 </div>
                 <div className="mt-4 flex flex-col flex-1">
                   <div className="flex justify-between items-start gap-4">

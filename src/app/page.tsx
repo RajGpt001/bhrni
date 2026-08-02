@@ -181,10 +181,10 @@ export default async function Home() {
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-          {featuredProducts.map((product: any) => (
+          {featuredProducts.map((product: any, index: number) => (
             <Link key={product.id} href={`/product/${product.slug}`} className="group flex flex-col">
               <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-200 xl:aspect-square">
-                <ProductGridImage images={product.images} name={product.name} />
+                <ProductGridImage images={product.images} name={product.name} index={index} />
               </div>
               <div className="mt-4 flex flex-col flex-1">
                 <div className="flex justify-between items-start gap-4">

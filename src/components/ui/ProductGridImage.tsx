@@ -3,18 +3,28 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-export function ProductGridImage({ images, name }: { images: any[]; name: string }) {
+export function ProductGridImage({ images, name, index = 0 }: { images: any[]; name: string; index?: number }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (!images || images.length <= 1) return;
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
+    // Stagger the start time by 1000ms per index
+    const initialDelay = (index % 3) * 1000;
+    let interval: NodeJS.Timeout;
 
-    return () => clearInterval(interval);
-  }, [images]);
+    const timeout = setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+      interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      }, 3000);
+    }, initialDelay + 3000); // Wait 3s + delay before first change
+
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
+  }, [images, index]);
 
   if (!images || images.length === 0) return null;
 
