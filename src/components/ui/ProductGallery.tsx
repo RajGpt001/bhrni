@@ -35,7 +35,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           </button>
         ))}
       </div>
-      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900">
+      <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900">
         {selectedImage && (
           <Image
             src={selectedImage.url}

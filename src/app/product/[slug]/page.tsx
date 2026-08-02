@@ -155,7 +155,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
             {relatedProducts.map((p: any) => (
               <Link key={p.id} href={`/product/${p.slug}`} className="group flex flex-col">
-                <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-200 xl:aspect-[4/5]">
+                <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-gray-200 xl:aspect-square">
                   {p.images[0] && (
                     <Image
                       src={p.images[0].url}
