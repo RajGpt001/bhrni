@@ -9,6 +9,7 @@ import WoodenCartButton from "@/components/ui/wooden-cart-button";
 import { ProductGridImage } from "@/components/ui/ProductGridImage";
 import { FeaturedLogos } from "@/components/ui/FeaturedLogos";
 import { CommunityBanner } from "@/components/ui/CommunityBanner";
+import { PromoBanner } from "@/components/ui/PromoBanner";
 
 export default async function Home() {
   const cookieStore = await cookies();
@@ -163,6 +164,9 @@ export default async function Home() {
           </Link>
         </HeroAnimation>
       </section>
+
+      {/* Promotional Banner inserted between Hero and Categories */}
+      <PromoBanner />
 
       {/* Categories */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
