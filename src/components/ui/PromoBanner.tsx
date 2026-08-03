@@ -10,7 +10,7 @@ const slides = [
     title: "Curated essentials\nfor everyday",
     buttonText: "Shop Now \u2192",
     href: "/category/all",
-    bgClass: "bg-[#dcece2] dark:bg-emerald-950/40",
+    bgClass: "bg-emerald-100 dark:bg-emerald-950/40",
     textClass: "text-teal-950 dark:text-teal-50",
     subtextClass: "text-teal-800 dark:text-teal-200 hover:text-teal-900 transition-colors",
     renderImages: () => (
@@ -53,7 +53,7 @@ const slides = [
     title: "New Arrivals\nSummer Fashion",
     buttonText: "Shop Collection \u2192",
     href: "/category/fashion",
-    bgClass: "bg-[#fcf3eb] dark:bg-orange-950/40",
+    bgClass: "bg-orange-100 dark:bg-orange-950/40",
     textClass: "text-orange-950 dark:text-orange-50",
     subtextClass: "text-orange-800 dark:text-orange-200 hover:text-orange-950 dark:hover:text-white transition-colors",
     renderImages: () => (
