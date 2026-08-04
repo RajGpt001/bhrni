@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { prisma } from "@/lib/prisma";
+import { createClient } from "@/lib/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,80 +8,32 @@ import { ProductGridImage } from "@/components/ui/ProductGridImage";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const supabase = await createClient();
 
   let product: any = null;
   try {
-    product = await prisma.product.findUnique({
-      where: { slug },
-      include: { images: true, category: true, variants: true },
-    });
+    const { data } = await supabase
+      .from('products')
+      .select('*, categories(name, slug)')
+      .eq('slug', slug)
+      .single();
+      
+    if (data) {
+      product = {
+        id: data.id,
+        name: data.name,
+        slug: data.slug,
+        price: data.price,
+        mrp: data.mrp,
+        description: data.description,
+        categoryId: data.category_id,
+        category: data.categories,
+        images: data.image_urls?.map((url: string, i: number) => ({ id: i.toString(), url })) || [],
+        variants: [{ sku: data.id.slice(-6).toUpperCase() }]
+      };
+    }
   } catch (error) {
-    if (slug === 'turtle-combo') {
-      product = {
-        id: 'fallback-turtle',
-        name: 'Turtle Combo',
-        slug,
-        price: 399,
-        mrp: 799,
-        description: 'A beautiful glass turtle combo featuring a unique turtle design inside an elegant ash tray. Crystal clear finish, durable and stylish. Perfect for gifting or home decor.',
-        category: { name: 'Home & Decor', slug: 'home-decor' },
-        images: [
-          { id: 'tc-1', url: '/products/turtle-combo/1.jpg' },
-          { id: 'tc-2', url: '/products/turtle-combo/2.jpg' },
-          { id: 'tc-3', url: '/products/turtle-combo/3.jpg' },
-          { id: 'tc-4', url: '/products/turtle-combo/4.jpg' },
-          { id: 'tc-5', url: '/products/turtle-combo/5.jpg' }
-        ],
-        variants: [{ sku: 'TRT-CMB-01' }]
-      };
-    } else if (slug === 'ash-tray') {
-      product = {
-        id: 'fallback-ash',
-        name: 'Ash Tray',
-        slug,
-        price: 299,
-        mrp: 599,
-        description: 'A premium quality glass ash tray for home or office. Durable, elegant, and easy to clean. Designed to elevate any setting with its modern and clear aesthetics. Perfect for indoor or outdoor use.',
-        category: { name: 'Home & Decor', slug: 'home-decor' },
-        images: [
-          { id: 'at-1', url: '/products/ash-tray/1.jpg' },
-          { id: 'at-2', url: '/products/ash-tray/2.jpg' },
-          { id: 'at-3', url: '/products/ash-tray/3.jpg' },
-          { id: 'at-4', url: '/products/ash-tray/4.png' },
-          { id: 'at-5', url: '/products/ash-tray/5.jpg' }
-        ],
-        variants: [{ sku: 'ASH-TRY-01' }]
-      };
-    } else if (slug === 'mosquito-lamp') {
-      product = {
-        id: 'fallback-0',
-        name: 'Mosquito Lamp',
-        slug,
-        price: 499,
-        mrp: 999,
-        description: 'Keep your environment mosquito-free with this quiet, safe, and efficient Mosquito Lamp. Powered by USB, this portable bug zapper uses physical mosquito control with a 368nm purple light wave to attract and trap insects safely without radiation. Easy to clean and perfect for home, office, or outdoor use.',
-        category: { name: 'Electronics', slug: 'electronics' },
-        images: [
-          { id: 'mq-1', url: '/products/mosquito-lamp/1.png' },
-          { id: 'mq-2', url: '/products/mosquito-lamp/2.png' },
-          { id: 'mq-3', url: '/products/mosquito-lamp/3.jpg' },
-          { id: 'mq-4', url: '/products/mosquito-lamp/4.jpg' }
-        ],
-        variants: [{ sku: 'MOSQ-LMP-01' }]
-      };
-    } else {
-      product = {
-        id: 'fallback-1',
-      name: 'Smartphone Pro Max (Demo)',
-      slug,
-      price: 89999,
-      mrp: 99999,
-      description: 'This is a fallback product because Vercel crashed on local SQLite.',
-      category: { name: 'Electronics', slug: 'electronics' },
-      images: [{ id: 'img-1', url: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&q=80' }],
-      variants: [{ sku: 'DEMO-123' }]
-    };
-  }
+    console.error(error);
   }
 
   if (!product) {
@@ -91,11 +43,25 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   // Also fetch some related products
   let relatedProducts: any = [];
   try {
-    relatedProducts = await prisma.product.findMany({
-      where: { categoryId: product.categoryId, id: { not: product.id }, published: true },
-      include: { images: true, category: true },
-      take: 4,
-    });
+    const { data } = await supabase
+      .from('products')
+      .select('*, categories(name)')
+      .eq('category_id', product.categoryId)
+      .neq('id', product.id)
+      .eq('is_active', true)
+      .limit(4);
+      
+    if (data) {
+      relatedProducts = data.map(p => ({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        price: p.price,
+        mrp: p.mrp,
+        category: { name: p.categories?.name },
+        images: p.image_urls?.map((url: string) => ({ url })) || []
+      }));
+    }
   } catch (error) {
     relatedProducts = [];
   }

@@ -1,12 +1,11 @@
 import { Suspense } from "react";
 /* eslint-disable */
-import { prisma } from "@/lib/prisma";
+import { createClient } from "@/lib/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SortDropdown from "@/components/ui/SortDropdown";
 import { ProductGridImage } from "@/components/ui/ProductGridImage";
-import { Prisma } from "@prisma/client";
 
 export default async function CategoryPage({ 
   params,
@@ -18,97 +17,55 @@ export default async function CategoryPage({
   const { slug } = await params;
   const { sort } = await searchParams;
   const isAll = slug === "all";
+  
+  const supabase = await createClient();
 
   let category: any = null;
   try {
-    category = isAll ? { name: "All Products", description: "Browse our entire collection" } : await prisma.category.findUnique({
-      where: { slug }
-    });
+    if (isAll) {
+      category = { name: "All Products", description: "Browse our entire collection" };
+    } else {
+      const { data } = await supabase.from('categories').select('*').eq('slug', slug).single();
+      category = data;
+    }
   } catch (error) {
-    category = isAll ? { name: "All Products", description: "Browse our entire collection" } : { id: "demo-category", name: "Demo Category", description: "Fallback data for Vercel SQLite demo" };
+    console.error(error);
   }
 
   if (!category) {
     notFound();
   }
 
-  let orderBy: Prisma.ProductOrderByWithRelationInput = {};
-  if (sort === "price_asc") {
-    orderBy = { price: "asc" };
-  } else if (sort === "price_desc") {
-    orderBy = { price: "desc" };
-  } else if (sort === "newest") {
-    orderBy = { createdAt: "desc" };
-  }
-
   let products: any = [];
   try {
-    products = await prisma.product.findMany({
-      where: isAll ? { published: true } : { categoryId: category?.id, published: true },
-      include: { images: true, category: true },
-      orderBy,
-    });
+    let query = supabase.from('products').select('*, categories(name)').eq('is_active', true);
+    
+    if (!isAll && category.id) {
+      query = query.eq('category_id', category.id);
+    }
+    
+    if (sort === "price_asc") {
+      query = query.order('price', { ascending: true });
+    } else if (sort === "price_desc") {
+      query = query.order('price', { ascending: false });
+    } else {
+      query = query.order('created_at', { ascending: false });
+    }
+
+    const { data } = await query;
+    if (data) {
+      products = data.map(p => ({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        price: p.price,
+        mrp: p.mrp,
+        category: { name: p.categories?.name },
+        images: p.image_urls?.map((url: string) => ({ url })) || []
+      }));
+    }
   } catch (error) {
-    products = [
-      {
-        id: 'fallback-turtle',
-        name: 'Turtle Combo',
-        slug: 'turtle-combo',
-        price: 399,
-        mrp: 799,
-        category: { name: 'Home & Decor' },
-        images: [
-          { url: '/products/turtle-combo/1.jpg' },
-          { url: '/products/turtle-combo/2.jpg' },
-          { url: '/products/turtle-combo/3.jpg' },
-          { url: '/products/turtle-combo/4.jpg' },
-          { url: '/products/turtle-combo/5.jpg' }
-        ]
-      },
-      {
-        id: 'fallback-ash',
-        name: 'Ash Tray',
-        slug: 'ash-tray',
-        price: 299,
-        mrp: 599,
-        category: { name: 'Home & Decor' },
-        images: [
-          { url: '/products/ash-tray/1.jpg' },
-          { url: '/products/ash-tray/2.jpg' },
-          { url: '/products/ash-tray/3.jpg' },
-          { url: '/products/ash-tray/4.png' },
-          { url: '/products/ash-tray/5.jpg' }
-        ]
-      },
-      {
-        id: 'fallback-0',
-        name: 'Mosquito Lamp',
-        slug: 'mosquito-lamp',
-        price: 499,
-        mrp: 999,
-        category: { name: 'Electronics' },
-        images: [
-          { url: '/products/mosquito-lamp/1.png' },
-          { url: '/products/mosquito-lamp/2.png' },
-          { url: '/products/mosquito-lamp/3.jpg' },
-          { url: '/products/mosquito-lamp/4.jpg' }
-        ]
-      },
-      {
-        id: 'fallback-1',
-        name: 'Smartphone Pro Max',
-        slug: 'smartphone-pro-max',
-        price: 89999,
-        mrp: 99999,
-        category: { name: 'Electronics' },
-        images: [
-          { url: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1605236453806-6ff36852230e?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?w=800&q=80' }
-        ]
-      }
-    ];
+    console.error(error);
   }
 
   return (

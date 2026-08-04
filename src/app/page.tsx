@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { prisma } from "@/lib/prisma";
+import { createClient } from "@/lib/supabase/server";
 import { LampIntro } from "@/components/ui/LampIntro";
 import { HeroAnimation } from "@/components/ui/HeroAnimation";
 import WoodenCartButton from "@/components/ui/wooden-cart-button";
@@ -15,125 +15,43 @@ export default async function Home() {
   const cookieStore = await cookies();
   const lampSeen = cookieStore.get("lamp_intro_seen")?.value === "true";
 
+  const supabase = await createClient();
+
   let featuredProducts: any = [];
   try {
-    featuredProducts = await prisma.product.findMany({
-      where: { featured: true, published: true },
-      include: { images: true, category: true },
-      take: 8,
-    });
+    const { data } = await supabase
+      .from('products')
+      .select('*, categories(name)')
+      .eq('is_active', true)
+      .limit(8);
+    
+    // Map Supabase response to the shape the components expect
+    if (data) {
+      featuredProducts = data.map(p => ({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        price: p.price,
+        mrp: p.mrp,
+        category: { name: p.categories?.name },
+        images: p.image_urls?.map((url: string) => ({ url })) || []
+      }));
+    }
   } catch (error) {
-    console.error("Prisma failed (expected on Vercel with local SQLite). Using fallback data.");
-    featuredProducts = [
-      {
-        id: 'fallback-turtle',
-        name: 'Turtle Combo',
-        slug: 'turtle-combo',
-        price: 399,
-        mrp: 799,
-        category: { name: 'Home & Decor' },
-        images: [
-          { url: '/products/turtle-combo/1.jpg' },
-          { url: '/products/turtle-combo/2.jpg' },
-          { url: '/products/turtle-combo/3.jpg' },
-          { url: '/products/turtle-combo/4.jpg' },
-          { url: '/products/turtle-combo/5.jpg' }
-        ]
-      },
-      {
-        id: 'fallback-ash',
-        name: 'Ash Tray',
-        slug: 'ash-tray',
-        price: 299,
-        mrp: 599,
-        category: { name: 'Home & Decor' },
-        images: [
-          { url: '/products/ash-tray/1.jpg' },
-          { url: '/products/ash-tray/2.jpg' },
-          { url: '/products/ash-tray/3.jpg' },
-          { url: '/products/ash-tray/4.png' },
-          { url: '/products/ash-tray/5.jpg' }
-        ]
-      },
-      {
-        id: 'fallback-0',
-        name: 'Mosquito Lamp',
-        slug: 'mosquito-lamp',
-        price: 499,
-        mrp: 999,
-        category: { name: 'Electronics' },
-        images: [
-          { url: '/products/mosquito-lamp/1.png' },
-          { url: '/products/mosquito-lamp/2.png' },
-          { url: '/products/mosquito-lamp/3.jpg' },
-          { url: '/products/mosquito-lamp/4.jpg' }
-        ]
-      },
-      {
-        id: 'fallback-1',
-        name: 'Smartphone Pro Max',
-        slug: 'smartphone-pro-max',
-        price: 89999,
-        mrp: 99999,
-        category: { name: 'Electronics' },
-        images: [
-          { url: 'https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1605236453806-6ff36852230e?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?w=800&q=80' }
-        ]
-      },
-      {
-        id: 'fallback-2',
-        name: 'Wireless Noise-Cancelling Headphones',
-        slug: 'wireless-headphones-nc',
-        price: 19999,
-        mrp: 29999,
-        category: { name: 'Electronics' },
-        images: [
-          { url: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&q=80' }
-        ]
-      },
-      {
-        id: 'fallback-3',
-        name: 'Smart 4K TV 55-inch',
-        slug: 'smart-4k-tv-55',
-        price: 45999,
-        mrp: 54999,
-        category: { name: 'Electronics' },
-        images: [
-          { url: 'https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1601944179066-29786cb9d32a?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1509281373149-e957c6296406?w=800&q=80' }
-        ]
-      },
-      {
-        id: 'fallback-4',
-        name: 'Men\'s Casual Cotton Shirt',
-        slug: 'mens-casual-cotton-shirt',
-        price: 999,
-        mrp: 1999,
-        category: { name: 'Fashion' },
-        images: [
-          { url: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1596755094514-f87e32f85e23?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800&q=80' },
-          { url: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80' }
-        ]
-      }
-    ];
+    console.error("Supabase failed. Using fallback data.");
   }
 
   let categories: any = [];
   try {
-    categories = await prisma.category.findMany({
-      where: { parentId: null },
-      take: 4,
-    });
+    const { data } = await supabase
+      .from('categories')
+      .select('*')
+      .order('sort_order', { ascending: true })
+      .limit(4);
+    
+    if (data) {
+      categories = data;
+    }
   } catch (error) {
     categories = [];
   }
