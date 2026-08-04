@@ -1,12 +1,62 @@
 /* eslint-disable */
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+import { validateCoupon, processCheckout } from "./actions";
+import { Tag, Loader2, X } from "lucide-react";
 
 export default function CartPage() {
-  const { items, removeFromCart, updateQuantity, totalPrice } = useCart();
+  const router = useRouter();
+  const { items, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
+  
+  const [couponCode, setCouponCode] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<{code: string, discount: number} | null>(null);
+  const [couponError, setCouponError] = useState<string | null>(null);
+  const [loading, setLoading] = useState({ apply: false, checkout: false });
+
+  const handleApplyCoupon = async () => {
+    if (!couponCode) return;
+    setLoading(prev => ({ ...prev, apply: true }));
+    setCouponError(null);
+
+    const res = await validateCoupon(couponCode, totalPrice);
+    if (res.error) {
+      setCouponError(res.error);
+      setAppliedCoupon(null);
+    } else if (res.success) {
+      setAppliedCoupon({ code: res.coupon.code, discount: res.discountAmount || 0 });
+      setCouponCode('');
+    }
+    
+    setLoading(prev => ({ ...prev, apply: false }));
+  };
+
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponError(null);
+  };
+
+  const handleCheckout = async () => {
+    setLoading(prev => ({ ...prev, checkout: true }));
+    setCouponError(null);
+
+    const res = await processCheckout(totalPrice, appliedCoupon?.code);
+    
+    if (res.error) {
+      setCouponError(res.error);
+      if (res.error.includes('Coupon')) {
+        setAppliedCoupon(null); // Invalidated coupon at checkout
+      }
+      setLoading(prev => ({ ...prev, checkout: false }));
+    } else {
+      // Success! Clear cart and redirect to account page
+      clearCart();
+      router.push('/account?success=order_placed');
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -26,6 +76,9 @@ export default function CartPage() {
       </div>
     );
   }
+
+  const tax = Math.round((totalPrice - (appliedCoupon?.discount || 0)) * 0.18);
+  const finalTotal = totalPrice - (appliedCoupon?.discount || 0) + tax;
 
   return (
     <div className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -102,15 +155,72 @@ export default function CartPage() {
           aria-labelledby="summary-heading"
           className="mt-16 rounded-lg bg-zinc-50 dark:bg-zinc-900/50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 border border-gray-200 dark:border-gray-800"
         >
-          <h2 id="summary-heading" className="text-lg font-medium text-gray-900 dark:text-white">
+          <h2 id="summary-heading" className="text-lg font-medium text-gray-900 dark:text-white mb-6">
             Order summary
           </h2>
 
-          <dl className="mt-6 space-y-4 text-sm text-gray-600 dark:text-gray-400">
+          {/* Coupon Code Section */}
+          <div className="mb-6 border-b border-gray-200 dark:border-gray-800 pb-6">
+            {!appliedCoupon ? (
+              <div>
+                <label htmlFor="coupon" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Have a coupon code?
+                </label>
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    <Tag className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <input
+                      type="text"
+                      id="coupon"
+                      value={couponCode}
+                      onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                      placeholder="Enter code"
+                      className="w-full pl-9 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-black uppercase font-mono text-sm"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleApplyCoupon}
+                    disabled={loading.apply || !couponCode}
+                    className="px-4 py-2 bg-gray-200 dark:bg-zinc-700 text-gray-900 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-zinc-600 transition-colors font-medium text-sm disabled:opacity-50 flex items-center justify-center min-w-[80px]"
+                  >
+                    {loading.apply ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Apply'}
+                  </button>
+                </div>
+                {couponError && (
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400">{couponError}</p>
+                )}
+              </div>
+            ) : (
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-3 rounded-md flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Tag className="h-4 w-4 text-green-600 dark:text-green-500" />
+                  <span className="font-mono font-medium text-green-800 dark:text-green-400">{appliedCoupon.code}</span>
+                  <span className="text-sm text-green-600 dark:text-green-500 font-medium">Applied!</span>
+                </div>
+                <button 
+                  onClick={removeCoupon}
+                  className="p-1 hover:bg-green-100 dark:hover:bg-green-800 rounded-md text-green-600 dark:text-green-400 transition-colors"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+          </div>
+
+          <dl className="space-y-4 text-sm text-gray-600 dark:text-gray-400">
             <div className="flex items-center justify-between">
               <dt>Subtotal</dt>
-              <dd className="font-medium text-gray-900 dark:text-white">₹{totalPrice}</dd>
+              <dd className="font-medium text-gray-900 dark:text-white">₹{totalPrice.toFixed(2)}</dd>
             </div>
+            
+            {appliedCoupon && (
+              <div className="flex items-center justify-between text-green-600 dark:text-green-400">
+                <dt>Discount ({appliedCoupon.code})</dt>
+                <dd className="font-medium">-₹{appliedCoupon.discount.toFixed(2)}</dd>
+              </div>
+            )}
+
             <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-800 pt-4">
               <dt className="flex items-center text-sm">
                 <span>Shipping estimate</span>
@@ -121,21 +231,30 @@ export default function CartPage() {
               <dt className="flex text-sm">
                 <span>Tax estimate</span>
               </dt>
-              <dd className="font-medium text-gray-900 dark:text-white">₹{Math.round(totalPrice * 0.18)}</dd>
+              <dd className="font-medium text-gray-900 dark:text-white">₹{tax.toFixed(2)}</dd>
             </div>
             <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-800 pt-4 text-base font-medium text-gray-900 dark:text-white">
               <dt>Order total</dt>
-              <dd>₹{totalPrice + Math.round(totalPrice * 0.18)}</dd>
+              <dd>₹{finalTotal.toFixed(2)}</dd>
             </div>
           </dl>
 
           <div className="mt-6">
             <button
               type="button"
-              className="w-full rounded-md border border-transparent bg-black px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-50 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
+              onClick={handleCheckout}
+              disabled={loading.checkout}
+              className="w-full flex items-center justify-center gap-2 rounded-md border border-transparent bg-black px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-50 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors disabled:opacity-50"
             >
-              Checkout
+              {loading.checkout ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" /> Processing...
+                </>
+              ) : 'Checkout securely'}
             </button>
+            {couponError && loading.checkout === false && (
+              <p className="mt-3 text-sm text-center text-red-600 dark:text-red-400">{couponError}</p>
+            )}
           </div>
         </section>
       </div>
