@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { AlertCircle, X } from 'lucide-react';
 
-export function UnauthorizedToast() {
+function UnauthorizedToastInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [show, setShow] = useState(false);
@@ -41,4 +41,12 @@ export function UnauthorizedToast() {
       </div>
     </div>
   );
+}
+
+export function UnauthorizedToast() {
+  return (
+    <Suspense fallback={null}>
+      <UnauthorizedToastInner />
+    </Suspense>
+  )
 }

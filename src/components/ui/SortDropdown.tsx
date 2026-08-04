@@ -1,8 +1,9 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 
-export default function SortDropdown() {
+function SortDropdownInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -34,4 +35,12 @@ export default function SortDropdown() {
       <option value="newest">Newest Arrivals</option>
     </select>
   );
+}
+
+export default function SortDropdown() {
+  return (
+    <Suspense fallback={<div className="h-9 w-40 bg-gray-100 dark:bg-zinc-800 rounded-md animate-pulse"></div>}>
+      <SortDropdownInner />
+    </Suspense>
+  )
 }
