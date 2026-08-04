@@ -50,15 +50,32 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  if (user && isAdminRoute) {
-    // Check if the user is an admin
+  if (user) {
+    // Check user profile for role and active status
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role')
+      .select('role, is_active')
       .eq('id', user.id)
       .single()
 
-    if (!profile || profile.role !== 'admin') {
+    if (profile) {
+      if (profile.is_active === false) {
+        // Suspend user
+        await supabase.auth.signOut()
+        const url = request.nextUrl.clone()
+        url.pathname = '/login'
+        url.searchParams.set('error', 'suspended')
+        return NextResponse.redirect(url)
+      }
+
+      if (isAdminRoute && profile.role !== 'admin') {
+        const url = request.nextUrl.clone()
+        url.pathname = '/'
+        url.searchParams.set('error', 'unauthorized')
+        return NextResponse.redirect(url)
+      }
+    } else if (isAdminRoute) {
+      // No profile, can't be admin
       const url = request.nextUrl.clone()
       url.pathname = '/'
       url.searchParams.set('error', 'unauthorized')
