@@ -12,7 +12,7 @@ async function main() {
 
   if (!electronics) {
     electronics = await prisma.category.create({
-      data: { name: 'Electronics', slug: 'electronics', image: '/category-electronics.png' }
+      data: { name: 'Electronics', slug: 'electronics' }
     });
   }
 
