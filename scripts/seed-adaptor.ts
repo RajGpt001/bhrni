@@ -21,7 +21,7 @@ async function main() {
     let user = await prisma.user.findFirst();
     if (!user) user = await prisma.user.create({ data: { name: 'Admin', email: 'admin@lyke.in' } });
     seller = await prisma.seller.create({
-      data: { storeName: 'Lyke Official', slug: 'lyke-official', userId: user.id }
+      data: { name: 'Lyke Official' }
     });
   }
 
