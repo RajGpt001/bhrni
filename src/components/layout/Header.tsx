@@ -62,39 +62,39 @@ export default function Header() {
             LYKE
           </Link>
           <nav className="hidden md:flex gap-8 items-center h-16">
-            <Link href="/" className="text-sm font-medium text-beige-800 hover:text-beige-900 dark:text-gray-300 dark:hover:text-white transition-colors h-full flex items-center">
+            <Link href="/" className="text-sm font-medium text-beige-900 font-semibold hover:text-accent dark:text-gray-300 dark:hover:text-white transition-colors h-full flex items-center">
               Home
             </Link>
             
             <div className="relative group h-full flex items-center">
-              <Link href="/category/fashion" className="text-sm font-medium text-beige-800 hover:text-beige-900 dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+              <Link href="/category/fashion" className="text-sm font-medium text-beige-900 font-semibold hover:text-accent dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
                 Fashion
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </Link>
               <div className="absolute left-0 top-[calc(100%-10px)] hidden group-hover:block w-48 pt-4 pb-2">
                 <div className="bg-beige-50 dark:bg-zinc-900 border border-beige-200 dark:border-gray-800 rounded-lg shadow-xl p-2 flex flex-col gap-1">
-                  <Link href="/category/fashion?sub=men" className="text-sm text-beige-800 dark:text-gray-300 hover:text-beige-900 dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Men's Clothing</Link>
-                  <Link href="/category/fashion?sub=women" className="text-sm text-beige-800 dark:text-gray-300 hover:text-beige-900 dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Women's Clothing</Link>
-                  <Link href="/category/fashion?sub=accessories" className="text-sm text-beige-800 dark:text-gray-300 hover:text-beige-900 dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Accessories</Link>
+                  <Link href="/category/fashion?sub=men" className="text-sm text-beige-900 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Men's Clothing</Link>
+                  <Link href="/category/fashion?sub=women" className="text-sm text-beige-900 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Women's Clothing</Link>
+                  <Link href="/category/fashion?sub=accessories" className="text-sm text-beige-900 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Accessories</Link>
                 </div>
               </div>
             </div>
 
             <div className="relative group h-full flex items-center">
-              <Link href="/category/electronics" className="text-sm font-medium text-beige-800 hover:text-beige-900 dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
+              <Link href="/category/electronics" className="text-sm font-medium text-beige-900 font-semibold hover:text-accent dark:text-gray-300 dark:hover:text-white transition-colors flex items-center gap-1">
                 Electronics
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </Link>
               <div className="absolute left-0 top-[calc(100%-10px)] hidden group-hover:block w-48 pt-4 pb-2">
                 <div className="bg-beige-50 dark:bg-zinc-900 border border-beige-200 dark:border-gray-800 rounded-lg shadow-xl p-2 flex flex-col gap-1">
-                  <Link href="/category/electronics?sub=smartphones" className="text-sm text-beige-800 dark:text-gray-300 hover:text-beige-900 dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Smartphones</Link>
-                  <Link href="/category/electronics?sub=laptops" className="text-sm text-beige-800 dark:text-gray-300 hover:text-beige-900 dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Laptops</Link>
-                  <Link href="/category/electronics?sub=audio" className="text-sm text-beige-800 dark:text-gray-300 hover:text-beige-900 dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Audio &amp; Headphones</Link>
+                  <Link href="/category/electronics?sub=smartphones" className="text-sm text-beige-900 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Smartphones</Link>
+                  <Link href="/category/electronics?sub=laptops" className="text-sm text-beige-900 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Laptops</Link>
+                  <Link href="/category/electronics?sub=audio" className="text-sm text-beige-900 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-beige-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Audio &amp; Headphones</Link>
                 </div>
               </div>
             </div>
 
-            <Link href="/category/new-arrivals" className="text-sm font-medium text-beige-800 hover:text-beige-900 dark:text-gray-300 dark:hover:text-white transition-colors h-full flex items-center">
+            <Link href="/category/new-arrivals" className="text-sm font-medium text-beige-900 font-semibold hover:text-accent dark:text-gray-300 dark:hover:text-white transition-colors h-full flex items-center">
               New Arrivals
             </Link>
           </nav>
@@ -114,7 +114,7 @@ export default function Header() {
               type="button"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               aria-label="Search" 
-              className={`flex-shrink-0 p-1.5 text-beige-800 hover:text-beige-900 dark:text-gray-300 dark:hover:text-white transition-colors ${
+              className={`flex-shrink-0 p-1.5 text-beige-900 font-semibold hover:text-accent dark:text-gray-300 dark:hover:text-white transition-colors ${
                 isSearchOpen ? 'text-beige-900 dark:text-white' : ''
               }`}
             >
@@ -130,10 +130,10 @@ export default function Header() {
               }`}
             />
           </form>
-          <Link href="/account" aria-label="Account" className="p-2 text-beige-800 hover:text-beige-900 dark:text-gray-300 dark:hover:text-white transition-colors">
+          <Link href="/account" aria-label="Account" className="p-2 text-beige-900 font-semibold hover:text-accent dark:text-gray-300 dark:hover:text-white transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </Link>
-          <Link id="cart-icon-target" href="/cart" aria-label="Cart" className="p-2 text-beige-800 hover:text-beige-900 dark:text-gray-300 dark:hover:text-white transition-colors relative">
+          <Link id="cart-icon-target" href="/cart" aria-label="Cart" className="p-2 text-beige-900 font-semibold hover:text-accent dark:text-gray-300 dark:hover:text-white transition-colors relative">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
             {totalItems > 0 && (
               <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-black dark:bg-beige-50 dark:text-beige-900 rounded-full">
