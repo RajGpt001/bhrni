@@ -56,7 +56,10 @@ export default async function CategoriesPage() {
                     <Link href={`/admin/categories/${cat.id}/edit`} className="text-blue-600 hover:text-blue-800 p-1">
                       <Edit2 className="h-4 w-4" />
                     </Link>
-                    <form action={deleteCategory.bind(null, cat.id)}>
+                    <form action={async () => {
+                      'use server';
+                      await deleteCategory(cat.id);
+                    }}>
                       <button type="submit" className="text-red-600 hover:text-red-800 p-1" onClick={(e) => {
                         if (cat.products[0]?.count > 0) {
                           e.preventDefault();
