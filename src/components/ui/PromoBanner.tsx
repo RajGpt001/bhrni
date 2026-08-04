@@ -10,9 +10,9 @@ const slides = [
     title: "Curated essentials\nfor everyday",
     buttonText: "Shop Now \u2192",
     href: "/category/all",
-    bgClass: "bg-emerald-100 dark:bg-emerald-950/40",
-    textClass: "text-teal-950 dark:text-teal-50",
-    subtextClass: "text-teal-800 dark:text-teal-200 hover:text-teal-900 transition-colors",
+    bgClass: "bg-[#a786df]",
+    textClass: "text-zinc-950",
+    subtextClass: "text-zinc-900 hover:text-black transition-colors",
     renderImages: () => (
       <div className="relative w-full h-32 md:h-full flex items-center justify-center md:justify-end gap-2 sm:gap-6">
         <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl transform -rotate-12 transition-transform duration-500 z-10">
