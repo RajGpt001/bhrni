@@ -154,7 +154,7 @@ export default async function Home() {
         </video>
         <HeroAnimation>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-beige-50 mb-6">
-            Everything You Need, All in One Place.
+            Find Everything You LYKE
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl">
             From fashion and tech to home essentials and everyday finds—discover thousands of products in one place.
