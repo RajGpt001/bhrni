@@ -154,13 +154,13 @@ export default async function Home() {
         </video>
         <HeroAnimation>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-beige-50 mb-6">
-            Elevate Your Everyday
+            Everything You Need, All in One Place.
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl">
-            Discover premium fashion, cutting-edge electronics, and home essentials curated just for you.
+            From fashion and tech to home essentials and everyday finds—discover thousands of products in one place.
           </p>
           <Link href="/category/all" className="inline-flex h-14 items-center justify-center rounded-full bg-beige-50 px-8 text-lg font-medium text-beige-900 transition-transform hover:scale-105 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black">
-            Shop the Collection
+            Start Exploring
           </Link>
         </HeroAnimation>
       </section>
