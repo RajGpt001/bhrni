@@ -5,7 +5,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import { CartProvider } from "@/context/CartContext";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,28 +27,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <AuthProvider>
-            <CartProvider>
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow flex flex-col">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            </CartProvider>
-          </AuthProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <CartProvider>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow flex flex-col">
+              {children}
+            </main>
+            <Footer />
+          </div>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
