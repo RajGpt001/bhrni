@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Plus, Edit2, Trash2 } from 'lucide-react'
+import { deleteCategory } from './actions'
 
 export default async function CategoriesPage() {
   const supabase = await createClient()
@@ -55,23 +56,7 @@ export default async function CategoriesPage() {
                     <Link href={`/admin/categories/${cat.id}/edit`} className="text-blue-600 hover:text-blue-800 p-1">
                       <Edit2 className="h-4 w-4" />
                     </Link>
-                    <form action={async () => {
-                      'use server';
-                      const { createClient } from '@/lib/supabase/server';
-                      const { revalidatePath } = require('next/cache');
-                      const supabase = await createClient();
-                      
-                      // Check for products
-                      const { count } = await supabase.from('products').select('*', { count: 'exact', head: true }).eq('category_id', cat.id);
-                      if (count && count > 0) {
-                        // Normally we'd return an error, but in a simple server action inline, we can just throw or not delete
-                        console.error('Cannot delete category with products');
-                        return;
-                      }
-                      
-                      await supabase.from('categories').delete().eq('id', cat.id);
-                      revalidatePath('/admin/categories');
-                    }}>
+                    <form action={deleteCategory.bind(null, cat.id)}>
                       <button type="submit" className="text-red-600 hover:text-red-800 p-1" onClick={(e) => {
                         if (cat.products[0]?.count > 0) {
                           e.preventDefault();
