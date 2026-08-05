@@ -72,10 +72,10 @@ export default function Header() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </Link>
               <div className="absolute left-0 top-[calc(100%-10px)] hidden group-hover:block w-48 pt-4 pb-2">
-                <div className="bg-[#8c7851] dark:bg-zinc-900 border border-[#766442] dark:border-gray-800 rounded-lg shadow-xl p-2 flex flex-col gap-1">
-                  <Link href="/category/fashion?sub=men" className="text-sm text-beige-800 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-[#a6926b] dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Men's Clothing</Link>
-                  <Link href="/category/fashion?sub=women" className="text-sm text-beige-800 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-[#a6926b] dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Women's Clothing</Link>
-                  <Link href="/category/fashion?sub=accessories" className="text-sm text-beige-800 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-[#a6926b] dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Accessories</Link>
+                <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-xl p-2 flex flex-col gap-1">
+                  <Link href="/category/fashion?sub=men" className="text-sm text-gray-800 font-semibold dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Men's Clothing</Link>
+                  <Link href="/category/fashion?sub=women" className="text-sm text-gray-800 font-semibold dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Women's Clothing</Link>
+                  <Link href="/category/fashion?sub=accessories" className="text-sm text-gray-800 font-semibold dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Accessories</Link>
                 </div>
               </div>
             </div>
@@ -86,10 +86,10 @@ export default function Header() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </Link>
               <div className="absolute left-0 top-[calc(100%-10px)] hidden group-hover:block w-48 pt-4 pb-2">
-                <div className="bg-[#8c7851] dark:bg-zinc-900 border border-[#766442] dark:border-gray-800 rounded-lg shadow-xl p-2 flex flex-col gap-1">
-                  <Link href="/category/electronics?sub=smartphones" className="text-sm text-beige-800 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-[#a6926b] dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Smartphones</Link>
-                  <Link href="/category/electronics?sub=laptops" className="text-sm text-beige-800 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-[#a6926b] dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Laptops</Link>
-                  <Link href="/category/electronics?sub=audio" className="text-sm text-beige-800 font-semibold dark:text-gray-300 hover:text-accent dark:hover:text-white hover:bg-[#a6926b] dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Audio &amp; Headphones</Link>
+                <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-xl p-2 flex flex-col gap-1">
+                  <Link href="/category/electronics?sub=smartphones" className="text-sm text-gray-800 font-semibold dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Smartphones</Link>
+                  <Link href="/category/electronics?sub=laptops" className="text-sm text-gray-800 font-semibold dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Laptops</Link>
+                  <Link href="/category/electronics?sub=audio" className="text-sm text-gray-800 font-semibold dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 px-3 py-2 rounded-md transition-colors">Audio &amp; Headphones</Link>
                 </div>
               </div>
             </div>
