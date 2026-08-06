@@ -57,7 +57,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col w-full bg-beige-50 dark:bg-beige-900">
+    <div className="flex flex-col flex-1 w-full bg-beige-50 dark:bg-beige-900">
       {!lampSeen && <LampIntro />}
       {/* Hero Section */}
       <section className="relative h-[calc(100vh-4rem)] w-full flex items-center justify-center overflow-hidden bg-zinc-900">
@@ -110,6 +110,22 @@ export default async function Home() {
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* Summer Bliss Banner */}
+      <section className="w-full relative group mb-12 sm:mb-24 cursor-pointer overflow-hidden">
+        <Link href="/category/fashion">
+          <div className="relative w-full h-[200px] sm:h-[300px] lg:h-[450px]">
+            <Image
+              src="/summer-bliss.png"
+              alt="Summer Bliss Collection Up To 50% Off"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              quality={100}
+              priority
+            />
+          </div>
+        </Link>
       </section>
 
       {/* Featured Products */}
