@@ -49,20 +49,15 @@ export function SignInCard({ errorMessage }: { errorMessage?: string }) {
     mouseY.set(0);
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleAction = async (formData: FormData) => {
     setIsLoading(true);
-    
-    // Create form data and invoke the server action
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    
-    // In next.js server actions, this will perform a redirect on success
-    await login(formData);
-    // Note: if it errors, the page reloads with ?message=error, so we don't need to setIsLoading(false) usually
-    // but just in case it doesn't navigate:
-    setTimeout(() => setIsLoading(false), 2000);
+    try {
+      await login(formData);
+    } catch (error) {
+      // Next.js redirect might throw an error, we can ignore it
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -266,7 +261,7 @@ export function SignInCard({ errorMessage }: { errorMessage?: string }) {
                 )}
 
                 {/* Login form */}
-                <form onSubmit={handleSubmit} className="space-y-4 relative z-20">
+                <form action={handleAction} className="space-y-4 relative z-20">
                   <motion.div className="space-y-3">
                     {/* Email input */}
                     <motion.div 

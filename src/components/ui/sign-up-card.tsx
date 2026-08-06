@@ -49,18 +49,15 @@ export function SignUpCard({ errorMessage }: { errorMessage?: string }) {
     mouseY.set(0);
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleAction = async (formData: FormData) => {
     setIsLoading(true);
-    
-    // Create form data and invoke the server action
-    const formData = new FormData();
-    formData.append('full_name', fullName);
-    formData.append('email', email);
-    formData.append('password', password);
-    
-    await signup(formData);
-    setTimeout(() => setIsLoading(false), 2000);
+    try {
+      await signup(formData);
+    } catch (error) {
+      // Next.js redirect might throw an error, we can ignore it
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -183,7 +180,7 @@ export function SignUpCard({ errorMessage }: { errorMessage?: string }) {
                 )}
 
                 {/* Signup form */}
-                <form onSubmit={handleSubmit} className="space-y-4 relative z-20">
+                <form action={handleAction} className="space-y-4 relative z-20">
                   <motion.div className="space-y-3">
                     
                     {/* Full Name input */}
