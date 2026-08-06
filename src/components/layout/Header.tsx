@@ -58,7 +58,7 @@ export default function Header() {
     >
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-12 lg:gap-24">
-          <Link href="/" className="text-2xl font-bold tracking-tighter text-beige-900">
+          <Link href="/" className="text-3xl font-black tracking-[0.2em] bg-clip-text text-transparent bg-gradient-to-r from-[#4A3728] to-[#8B5A2B] hover:opacity-80 transition-opacity drop-shadow-sm">
             LYKE
           </Link>
           <nav className="hidden md:flex gap-8 items-center h-16">
