@@ -110,7 +110,7 @@ export function SignUpCard({ errorMessage }: { errorMessage?: string }) {
   return (
     <div className="min-h-screen w-full bg-[#FAF8F5] relative overflow-hidden flex items-center justify-center -mt-16">
       {/* Background gradient effect - matches the purple OnlyPipe style */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#D2B48C]/40 via-[#8B5A2B]/20 to-[#FAF8F5]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#4A3728]/80 via-[#8B5A2B]/40 to-[#FAF8F5]" />
       
       {/* Subtle noise texture overlay */}
       <div className="absolute inset-0 opacity-[0.03] mix-blend-soft-light" 
@@ -121,9 +121,9 @@ export function SignUpCard({ errorMessage }: { errorMessage?: string }) {
       />
 
       {/* Top radial glow */}
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120vh] h-[60vh] rounded-b-[50%] bg-[#D2B48C]/30 blur-[80px]" />
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120vh] h-[60vh] rounded-b-[50%] bg-white/60 blur-[100px]" />
       <motion.div 
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[100vh] h-[60vh] rounded-b-full bg-[#C19A6B]/30 blur-[60px]"
+        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[100vh] h-[60vh] rounded-b-full bg-white/40 blur-[80px]"
         animate={{ opacity: [0.15, 0.3, 0.15], scale: [0.98, 1.02, 0.98] }}
         transition={{ duration: 8, repeat: Infinity, repeatType: "mirror" }}
       />
