@@ -110,7 +110,7 @@ export function SignInCard({ errorMessage }: { errorMessage?: string }) {
   return (
     <div className="min-h-screen w-full bg-[#FAF8F5] relative overflow-hidden flex items-center justify-center -mt-16">
       {/* Background gradient effect - matches the purple OnlyPipe style */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#4A3728]/80 via-[#8B5A2B]/40 to-[#FAF8F5]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/80 via-[#8B5A2B]/40 to-[#4A3728]" />
       
       {/* Subtle noise texture overlay */}
       <div className="absolute inset-0 opacity-[0.03] mix-blend-soft-light" 
