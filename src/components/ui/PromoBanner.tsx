@@ -90,7 +90,7 @@ export function PromoBanner() {
   };
 
   return (
-    <section className="w-full mt-16 mb-8 relative group">
+    <section className="w-full mb-8 relative group">
       {/* Slider Container */}
       <div className="relative w-full overflow-hidden h-[380px] md:h-[280px]">
         {slides.map((slide, index) => (
