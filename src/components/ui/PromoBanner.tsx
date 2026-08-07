@@ -124,17 +124,17 @@ export function PromoBanner() {
       {/* Navigation Arrows */}
       <button 
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/40 dark:bg-black/40 backdrop-blur-md flex items-center justify-center text-black dark:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20 hover:bg-white/80 dark:hover:bg-black/80 shadow-xl"
+        className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-black/80 via-black/40 to-transparent flex items-center justify-start pl-4 md:pl-8 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 hover:from-black"
         aria-label="Previous slide"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
+        <svg className="w-8 h-8 md:w-10 md:h-10 transition-transform hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
       </button>
       <button 
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/40 dark:bg-black/40 backdrop-blur-md flex items-center justify-center text-black dark:text-white opacity-0 group-hover:opacity-100 transition-opacity z-20 hover:bg-white/80 dark:hover:bg-black/80 shadow-xl"
+        className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-black/80 via-black/40 to-transparent flex items-center justify-end pr-4 md:pr-8 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 hover:from-black"
         aria-label="Next slide"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+        <svg className="w-8 h-8 md:w-10 md:h-10 transition-transform hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
       </button>
       
       {/* Dots Indicator */}
