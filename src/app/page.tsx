@@ -10,6 +10,7 @@ import { ProductGridImage } from "@/components/ui/ProductGridImage";
 import { FeaturedLogos } from "@/components/ui/FeaturedLogos";
 import { CommunityBanner } from "@/components/ui/CommunityBanner";
 import { PromoBanner } from "@/components/ui/PromoBanner";
+import { DotPatternDemo } from "@/components/demo/dot-pattern-demo";
 
 export default async function Home() {
   const cookieStore = await cookies();
@@ -171,6 +172,10 @@ export default async function Home() {
             </Link>
           ))}
         </div>
+      </section>
+
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full mb-24">
+        <DotPatternDemo />
       </section>
 
       <FeaturedLogos />
