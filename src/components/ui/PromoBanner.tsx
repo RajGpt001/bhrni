@@ -53,9 +53,9 @@ const slides = [
     title: "New Arrivals\nSummer Fashion",
     buttonText: "Shop Collection \u2192",
     href: "/category/fashion",
-    bgClass: "bg-orange-100 dark:bg-orange-950/40",
-    textClass: "text-orange-950 dark:text-orange-50",
-    subtextClass: "text-orange-800 dark:text-orange-200 hover:text-orange-950 dark:hover:text-white transition-colors",
+    bgClass: "bg-gradient-to-r from-[#4A1515] to-[#2D0A0A]",
+    textClass: "text-[#FAF8F5]",
+    subtextClass: "text-rose-200 hover:text-white transition-colors",
     renderImages: () => (
       <div className="relative w-full h-32 md:h-full flex items-center justify-center md:justify-end gap-2 sm:gap-4">
         <div className="w-24 h-32 sm:w-32 sm:h-44 rounded-t-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-xl transform rotate-3 transition-transform duration-500 z-10">
