@@ -174,10 +174,6 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full mb-24">
-        <DotPatternDemo />
-      </section>
-
       <FeaturedLogos />
       <CommunityBanner />
     </div>

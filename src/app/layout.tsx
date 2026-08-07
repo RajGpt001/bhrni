@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   description: "Discover the finest collection of fashion, electronics, and home essentials. Elevate your everyday style with Lyke India.",
 };
 
+import { DotPattern } from "@/components/ui/dot-pattern";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,12 +31,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative bg-[#FAF8F5]`}
       >
+        <DotPattern className="fixed inset-0 -z-10 opacity-30" />
         <CartProvider>
           <div className="flex flex-col min-h-screen">
             <Header />
-            <main className="flex-grow flex flex-col">
+            <main className="flex-grow flex flex-col relative z-0">
               {children}
             </main>
             <Footer />
