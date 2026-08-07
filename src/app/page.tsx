@@ -116,15 +116,15 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Summer Bliss Banner */}
       <section className="w-full relative group mb-12 sm:mb-24 cursor-pointer overflow-hidden">
         <Link href="/category/fashion">
-          <div className="relative w-full h-[200px] sm:h-[300px] lg:h-[450px]">
+          <div className="relative w-full">
             <Image
               src="/summer-bliss.png"
               alt="Summer Bliss Collection Up To 50% Off"
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              width={1920}
+              height={500}
+              className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               quality={100}
               priority
             />
