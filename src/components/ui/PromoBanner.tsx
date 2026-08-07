@@ -19,7 +19,7 @@ const slides = [
           <Image src="https://images.unsplash.com/photo-1523206489230-c012c64b2b48?w=400&q=80" alt="Tech" fill className="object-cover" />
         </div>
         <div className="w-28 h-28 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl transform rotate-6 transition-transform duration-500 z-20 -ml-6 sm:ml-0">
-          <Image src="https://images.unsplash.com/photo-1596755094514-f87e32f85e23?w=400&q=80" alt="Fashion" fill className="object-cover" />
+          <Image src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80" alt="Fashion" fill className="object-cover" />
         </div>
         <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-3xl overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl transform -rotate-6 transition-transform duration-500 hidden sm:block">
           <Image src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&q=80" alt="Audio" fill className="object-cover" />
@@ -63,6 +63,44 @@ const slides = [
         </div>
         <div className="w-28 h-36 sm:w-36 sm:h-48 rounded-b-full overflow-hidden border-4 border-white dark:border-zinc-800 shadow-xl transform -rotate-3 transition-transform duration-500 z-20 -mt-8">
           <Image src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400&q=80" alt="Fashion 2" fill className="object-cover" />
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 4,
+    title: "Home & Living\nElevate your space",
+    buttonText: "Discover More \u2192",
+    href: "/category/home-kitchen",
+    bgClass: "bg-[#2D4A22]",
+    textClass: "text-[#FAF8F5]",
+    subtextClass: "text-green-200 hover:text-white transition-colors",
+    renderImages: () => (
+      <div className="relative w-full h-32 md:h-full flex items-center justify-center md:justify-end gap-2 sm:gap-4">
+        <div className="w-32 h-32 sm:w-48 sm:h-48 rounded-[3rem] overflow-hidden border-4 border-white dark:border-zinc-800 shadow-2xl transform rotate-3 transition-transform duration-500 z-20">
+          <Image src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&q=80" alt="Home Decor" fill className="object-cover" />
+        </div>
+        <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden border-4 border-[#2D4A22] shadow-xl transform -rotate-6 transition-transform duration-500 z-10 -ml-8 sm:-ml-12 mt-12">
+          <Image src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&q=80" alt="Furniture" fill className="object-cover" />
+        </div>
+      </div>
+    )
+  },
+  {
+    id: 5,
+    title: "Beauty & Care\nGlow every day",
+    buttonText: "Shop Beauty \u2192",
+    href: "/category/beauty",
+    bgClass: "bg-[#D4A373]",
+    textClass: "text-zinc-900",
+    subtextClass: "text-zinc-800 hover:text-black transition-colors",
+    renderImages: () => (
+      <div className="relative w-full h-32 md:h-full flex items-center justify-center md:justify-end gap-3 sm:gap-6">
+        <div className="w-20 h-28 sm:w-28 sm:h-40 rounded-full overflow-hidden border-4 border-white shadow-xl transform -rotate-12 transition-transform duration-500 z-10">
+          <Image src="https://images.unsplash.com/photo-1596462502278-27bf85033e5a?w=400&q=80" alt="Skincare" fill className="object-cover" />
+        </div>
+        <div className="w-28 h-28 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-4 border-white shadow-2xl transform rotate-6 transition-transform duration-500 z-20 mt-4">
+          <Image src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&q=80" alt="Cosmetics" fill className="object-cover" />
         </div>
       </div>
     )
