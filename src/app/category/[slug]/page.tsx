@@ -69,8 +69,8 @@ export default async function CategoryPage({
   }
 
   return (
-    <div className="flex flex-col flex-1 w-full bg-white dark:bg-black">
-      <div className="bg-zinc-50 dark:bg-zinc-900 border-b border-gray-200 dark:border-gray-800 py-16 px-4">
+    <div className="flex flex-col flex-1 w-full">
+      <div className="border-b border-gray-200 dark:border-gray-800 py-16 px-4">
         <div className="container mx-auto max-w-7xl text-center">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
             {category.name}

@@ -31,13 +31,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative bg-[#FAF8F5]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FAF8F5]`}
       >
-        <DotPattern className="fixed inset-0 -z-10 opacity-30" />
         <CartProvider>
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col min-h-screen relative z-0">
+            <DotPattern className="fixed inset-0 z-[-1] opacity-50" />
             <Header />
-            <main className="flex-grow flex flex-col relative z-0">
+            <main className="flex-grow flex flex-col">
               {children}
             </main>
             <Footer />

@@ -58,7 +58,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex flex-col flex-1 w-full bg-beige-50 dark:bg-beige-900">
+    <div className="flex flex-col flex-1 w-full">
       {!lampSeen && <LampIntro />}
       {/* Hero Section */}
       <section className="relative h-[calc(100vh-4rem)] w-full flex items-center justify-center overflow-hidden bg-zinc-900">
