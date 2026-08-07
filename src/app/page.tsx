@@ -97,7 +97,7 @@ export default async function Home() {
           {[
             { name: 'Electronics', slug: 'electronics', image: '/category-electronics.png' },
             { name: 'Fashion', slug: 'fashion', image: '/category-fashion.png' },
-            { name: 'Home & Kitchen', slug: 'home-kitchen', image: '/category-home.png' },
+            { name: 'Home & Kitchen', slug: 'home-kitchen', image: '/category-home-v2.png' },
             { name: 'Beauty', slug: 'beauty', image: '/category-beauty.png' },
           ].map((category) => (
             <Link key={category.slug} href={`/category/${category.slug}`} className="group relative h-64 overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900">
