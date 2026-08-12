@@ -68,6 +68,7 @@ export default async function Home() {
           loop
           muted
           playsInline
+          preload="auto"
           className="absolute inset-0 h-full w-full object-cover opacity-50 scale-[1.25] origin-top-left"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
