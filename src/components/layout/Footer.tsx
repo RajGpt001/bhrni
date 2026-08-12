@@ -50,15 +50,6 @@ export default function Footer() {
             <p className="text-sm text-beige-300">
               &copy; {new Date().getFullYear()} Lyke India. All rights reserved.
             </p>
-            <button 
-              onClick={() => {
-                document.cookie = "lamp_intro_seen=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                window.location.reload();
-              }}
-              className="text-xs text-beige-400 hover:text-beige-50 underline transition-colors"
-            >
-              Reset Intro (Test)
-            </button>
           </div>
           <div className="mt-6 md:mt-0 flex gap-6">
             <span className="text-beige-300">
