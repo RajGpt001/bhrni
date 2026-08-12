@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Plus, Edit2, Trash2 } from 'lucide-react'
 import { deleteCategory } from './actions'
-
+import { DeleteButton } from './DeleteButton'
 export default async function CategoriesPage() {
   const supabase = await createClient()
 
@@ -56,21 +56,7 @@ export default async function CategoriesPage() {
                     <Link href={`/admin/categories/${cat.id}/edit`} className="text-blue-600 hover:text-blue-800 p-1">
                       <Edit2 className="h-4 w-4" />
                     </Link>
-                    <form action={async () => {
-                      'use server';
-                      await deleteCategory(cat.id);
-                    }}>
-                      <button type="submit" className="text-red-600 hover:text-red-800 p-1" onClick={(e) => {
-                        if (cat.products[0]?.count > 0) {
-                          e.preventDefault();
-                          alert('Cannot delete this category because it has products linked to it.');
-                        } else if (!confirm('Are you sure you want to delete this category?')) {
-                          e.preventDefault();
-                        }
-                      }}>
-                        <Trash2 className="h-4 w-4" />
-                      </button>
-                    </form>
+                    <DeleteButton categoryId={cat.id} productCount={cat.products[0]?.count || 0} />
                   </td>
                 </tr>
               ))}
