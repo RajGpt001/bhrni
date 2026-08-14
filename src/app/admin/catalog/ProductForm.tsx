@@ -45,19 +45,24 @@ export default function ProductForm({
       formData.append('existing_images', img)
     })
     
-    let res
-    if (initialData) {
-      res = await updateProduct(initialData.id, formData)
-    } else {
-      res = await createProduct(formData)
-    }
+    try {
+      let res
+      if (initialData) {
+        res = await updateProduct(initialData.id, formData)
+      } else {
+        res = await createProduct(formData)
+      }
 
-    if (res?.error) {
-      setError(res.error)
+      if (res?.error) {
+        setError(res.error)
+        setLoading(false)
+      } else {
+        router.push('/admin/catalog')
+        router.refresh()
+      }
+    } catch (err: any) {
+      setError(err?.message || 'An unexpected error occurred while saving.')
       setLoading(false)
-    } else {
-      router.push('/admin/catalog')
-      router.refresh()
     }
   }
 
