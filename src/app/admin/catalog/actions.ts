@@ -25,9 +25,13 @@ export async function createProduct(formData: FormData) {
       const fileExt = image.name.split('.').pop()
       const fileName = `${Math.random()}.${fileExt}`
       
+      const buffer = Buffer.from(await image.arrayBuffer())
+      
       const { error: uploadError } = await supabase.storage
         .from('product-images')
-        .upload(fileName, image)
+        .upload(fileName, buffer, {
+          contentType: image.type,
+        })
         
       if (!uploadError) {
         const { data: publicUrlData } = supabase.storage
@@ -84,9 +88,13 @@ export async function updateProduct(id: string, formData: FormData) {
       const fileExt = image.name.split('.').pop()
       const fileName = `${Math.random()}.${fileExt}`
       
+      const buffer = Buffer.from(await image.arrayBuffer())
+      
       const { error: uploadError } = await supabase.storage
         .from('product-images')
-        .upload(fileName, image)
+        .upload(fileName, buffer, {
+          contentType: image.type,
+        })
         
       if (!uploadError) {
         const { data: publicUrlData } = supabase.storage
