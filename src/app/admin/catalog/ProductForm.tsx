@@ -5,6 +5,7 @@ import { createProduct, updateProduct } from './actions'
 import { ArrowLeft, Save, X } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function ProductForm({ 
   initialData,
@@ -13,6 +14,7 @@ export default function ProductForm({
   initialData?: any,
   categories: any[]
 }) {
+  const router = useRouter()
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [slug, setSlug] = useState(initialData?.slug || '')
@@ -53,6 +55,9 @@ export default function ProductForm({
     if (res?.error) {
       setError(res.error)
       setLoading(false)
+    } else {
+      router.push('/admin/catalog')
+      router.refresh()
     }
   }
 
