@@ -6,6 +6,7 @@ import { ArrowLeft, Save, X } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 
 export default function ProductForm({ 
   initialData,
@@ -45,14 +46,41 @@ export default function ProductForm({
       formData.append('existing_images', img)
     })
     
-    // Check total file size to prevent Vercel 4.5MB limit crashes
+    // We handle file uploads client-side to bypass Vercel's 4.5MB Server Action payload limit
     const imageFiles = formData.getAll('images') as File[]
-    const totalSize = imageFiles.reduce((acc, file) => acc + (file.size || 0), 0)
-    if (totalSize > 4.5 * 1024 * 1024) {
-      setError('Images are too large. Please ensure total image size is under 4.5MB.')
-      setLoading(false)
-      return
+    const supabase = createClient()
+    const new_image_urls: string[] = []
+    
+    for (const image of imageFiles) {
+      if (image && image.size > 0) {
+        const fileExt = image.name.split('.').pop()
+        const fileName = `${Math.random()}.${fileExt}`
+        
+        const { error: uploadError } = await supabase.storage
+          .from('product-images')
+          .upload(fileName, image)
+          
+        if (uploadError) {
+          setError(`Failed to upload image: ${uploadError.message}`)
+          setLoading(false)
+          return
+        }
+        
+        const { data: publicUrlData } = supabase.storage
+          .from('product-images')
+          .getPublicUrl(fileName)
+          
+        new_image_urls.push(publicUrlData.publicUrl)
+      }
     }
+    
+    // Remove the binary files from formData so they aren't sent to the Vercel server
+    formData.delete('images')
+    
+    // Append the uploaded URLs instead
+    new_image_urls.forEach(url => {
+      formData.append('uploaded_image_urls', url)
+    })
     
     try {
       let res

@@ -16,32 +16,8 @@ export async function createProduct(formData: FormData) {
   const stock_quantity = parseInt(formData.get('stock_quantity') as string) || 0
   const is_active = formData.get('is_active') === 'true'
 
-  // Handle multiple images
-  const imageFiles = formData.getAll('images') as File[]
-  const image_urls: string[] = []
-
-  for (const image of imageFiles) {
-    if (image && image.size > 0) {
-      const fileExt = image.name.split('.').pop()
-      const fileName = `${Math.random()}.${fileExt}`
-      
-      const buffer = Buffer.from(await image.arrayBuffer())
-      
-      const { error: uploadError } = await supabase.storage
-        .from('product-images')
-        .upload(fileName, buffer, {
-          contentType: image.type,
-        })
-        
-      if (!uploadError) {
-        const { data: publicUrlData } = supabase.storage
-          .from('product-images')
-          .getPublicUrl(fileName)
-          
-        image_urls.push(publicUrlData.publicUrl)
-      }
-    }
-  }
+  // Read the uploaded image URLs that were uploaded on the client-side
+  const image_urls = formData.getAll('uploaded_image_urls') as string[]
 
   const { error } = await supabase.from('products').insert({
     name,
@@ -79,32 +55,8 @@ export async function updateProduct(id: string, formData: FormData) {
   // Existing images from hidden inputs
   const existingImages = formData.getAll('existing_images') as string[]
   
-  // New images
-  const imageFiles = formData.getAll('images') as File[]
-  const new_image_urls: string[] = []
-
-  for (const image of imageFiles) {
-    if (image && image.size > 0) {
-      const fileExt = image.name.split('.').pop()
-      const fileName = `${Math.random()}.${fileExt}`
-      
-      const buffer = Buffer.from(await image.arrayBuffer())
-      
-      const { error: uploadError } = await supabase.storage
-        .from('product-images')
-        .upload(fileName, buffer, {
-          contentType: image.type,
-        })
-        
-      if (!uploadError) {
-        const { data: publicUrlData } = supabase.storage
-          .from('product-images')
-          .getPublicUrl(fileName)
-          
-        new_image_urls.push(publicUrlData.publicUrl)
-      }
-    }
-  }
+  // New images (uploaded on client)
+  const new_image_urls = formData.getAll('uploaded_image_urls') as string[]
 
   const finalImageUrls = [...existingImages, ...new_image_urls]
 
