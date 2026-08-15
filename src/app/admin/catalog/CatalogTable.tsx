@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Edit2, Trash2, CheckSquare, Square } from 'lucide-react'
-import { bulkDeleteProducts, bulkToggleActiveProducts } from './actions'
+import { bulkDeleteProducts, bulkToggleActiveProducts, deleteProduct } from './actions'
 
 export default function CatalogTable({ products }: { products: any[] }) {
   const [selected, setSelected] = useState<string[]>([])
@@ -31,6 +31,14 @@ export default function CatalogTable({ products }: { products: any[] }) {
       setLoading(true)
       await bulkDeleteProducts(selected)
       setSelected([])
+      setLoading(false)
+    }
+  }
+
+  const handleDelete = async (id: string) => {
+    if (confirm('Are you sure you want to delete this product?')) {
+      setLoading(true)
+      await deleteProduct(id)
       setLoading(false)
     }
   }
@@ -129,6 +137,13 @@ export default function CatalogTable({ products }: { products: any[] }) {
                     <Link href={`/admin/catalog/${prod.id}/edit`} className="text-blue-600 hover:text-blue-800 p-1">
                       <Edit2 className="h-4 w-4" />
                     </Link>
+                    <button 
+                      onClick={() => handleDelete(prod.id)}
+                      disabled={loading}
+                      className="text-red-600 hover:text-red-800 p-1 disabled:opacity-50"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
                   </td>
                 </tr>
               ))}
