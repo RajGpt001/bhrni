@@ -45,6 +45,15 @@ export default function ProductForm({
       formData.append('existing_images', img)
     })
     
+    // Check total file size to prevent Vercel 4.5MB limit crashes
+    const imageFiles = formData.getAll('images') as File[]
+    const totalSize = imageFiles.reduce((acc, file) => acc + (file.size || 0), 0)
+    if (totalSize > 4.5 * 1024 * 1024) {
+      setError('Images are too large. Please ensure total image size is under 4.5MB.')
+      setLoading(false)
+      return
+    }
+    
     try {
       let res
       if (initialData) {
